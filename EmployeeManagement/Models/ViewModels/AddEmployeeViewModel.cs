@@ -1,6 +1,6 @@
 ﻿namespace EmployeeManagement.Models.ViewModels
 {
-    public class CreateEmployeeViewModel
+    public class AddEmployeeViewModel
     {
         public required string FirstName { get; set; }
         public string? MiddleName { get; set; }
