@@ -1,4 +1,5 @@
 using EmployeeManagement.Data;
+using EmployeeManagement.Services;
 using Microsoft.EntityFrameworkCore;
 namespace EmployeeManagement
 {
@@ -13,6 +14,12 @@ namespace EmployeeManagement
 
             // Database 
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+            // Controller
+            builder.Services.AddScoped<EmployeeService>();
+            builder.Services.AddScoped<IReadEmployeeService, EmployeeService>();
+            builder.Services.AddScoped<IWriteEmployeeService, EmployeeService>();
 
             var app = builder.Build();
 
@@ -32,7 +39,7 @@ namespace EmployeeManagement
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
+                pattern: "{controller=Employee}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();
